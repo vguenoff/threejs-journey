@@ -27,20 +27,17 @@ module.exports = {
                 test: /\.(html)$/,
                 use: ['html-loader'],
             },
-
             // JS
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: ['babel-loader'],
             },
-
             // CSS
             {
                 test: /\.css$/,
                 use: [MiniCSSExtractPlugin.loader, 'css-loader'],
             },
-
             // Images
             {
                 test: /\.(jpg|png|gif|svg)$/,
@@ -53,7 +50,6 @@ module.exports = {
                     },
                 ],
             },
-
             // Fonts
             {
                 test: /\.(ttf|eot|woff|woff2)$/,
