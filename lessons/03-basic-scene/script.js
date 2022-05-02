@@ -1,6 +1,7 @@
 const canvas = document.querySelector('.webgl')
-// Sizes
-const sizes = {
+
+// Viewport size
+const viewportSize = {
     width: 800,
     height: 600,
 }
@@ -8,15 +9,18 @@ const sizes = {
 // Scene
 const scene = new THREE.Scene()
 
-// Red cube
+// Red Cube
 const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({color: 0xff0000})
 const mesh = new THREE.Mesh(geometry, material)
-
 scene.add(mesh)
 
 // Camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
+// field of view (in degrees) (FOV), aspect ratio
+const camera = new THREE.PerspectiveCamera(
+    75,
+    viewportSize.width / viewportSize.height,
+)
 camera.position.z = 3
 scene.add(camera)
 
@@ -24,6 +28,5 @@ scene.add(camera)
 const renderer = new THREE.WebGLRenderer({
     canvas,
 })
-
-renderer.setSize(sizes.width, sizes.height)
+renderer.setSize(viewportSize.width, viewportSize.height)
 renderer.render(scene, camera)
