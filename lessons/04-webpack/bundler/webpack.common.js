@@ -6,13 +6,14 @@ const path = require('path')
 module.exports = {
     entry: path.resolve(__dirname, '../src/script.js'),
     output: {
+        hashFunction: 'xxhash64',
         filename: 'bundle.[contenthash].js',
         path: path.resolve(__dirname, '../dist'),
     },
     devtool: 'source-map',
     plugins: [
         new CopyWebpackPlugin({
-            patterns: [{from: path.resolve(__dirname, '../static')}],
+            patterns: [{ from: path.resolve(__dirname, '../static') }],
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../src/index.html'),
@@ -41,26 +42,18 @@ module.exports = {
             // Images
             {
                 test: /\.(jpg|png|gif|svg)$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            outputPath: 'assets/images/',
-                        },
-                    },
-                ],
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/images/[hash][ext]',
+                },
             },
             // Fonts
             {
                 test: /\.(ttf|eot|woff|woff2)$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            outputPath: 'assets/fonts/',
-                        },
-                    },
-                ],
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/fonts/[hash][ext]',
+                },
             },
         ],
     },
